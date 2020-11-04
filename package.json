@@ -18,7 +18,8 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "lint": "eslint --ext 'src/**/*.js' 'test/**/*.js'",
+    "lint": "eslint src test",
+    "lint:fix": "eslint src test --fix",
     "prebuild": "rimraf dist",
     "build": "rollup -c rollup.config.js",
     "start": "rollup -c rollup.config.js -w",
