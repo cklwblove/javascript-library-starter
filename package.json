@@ -1,0 +1,114 @@
+{
+  "name": "--libraryname--",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "dist/--libraryname--.umd.js",
+  "module": "dist/--libraryname--.esm.js",
+  "files": [
+    "dist"
+  ],
+  "author": "--username-- <--usermail-->",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "lint": "eslint --ext 'src/**/*.js' 'test/**/*.js'",
+    "prebuild": "rimraf dist",
+    "build": "rollup -c rollup.config.js",
+    "start": "rollup -c rollup.config.js -w",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch",
+    "test:prod": "npm run lint && npm run test -- --no-cache",
+    "deploy-docs": "node tools/gh-pages-publish",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release",
+    "semantic-release-prepare": "node tools/semantic-release-prepare",
+    "precommit": "lint-staged",
+    "postinstall": "node tools/init",
+    "travis-deploy-once": "travis-deploy-once"
+  },
+  "lint-staged": {
+    "{src,test}/**/*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverageFrom": [
+      "src/*.{js,ts}"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@rollup/plugin-babel": "^5.2.1",
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
+    "@winner-fed/eslint-config-win": "^1.0.7",
+    "babel-eslint": "^10.1.0",
+    "colors": "^1.4.0",
+    "commitizen": "^4.2.2",
+    "coveralls": "^3.1.0",
+    "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.12.1",
+    "husky": "^4.3.0",
+    "jest": "^26.6.2",
+    "jest-config": "^26.6.2",
+    "lint-staged": "^10.5.1",
+    "lodash.camelcase": "^4.3.0",
+    "prettier": "^2.1.2",
+    "prompt": "^1.0.0",
+    "replace-in-file": "^6.1.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.33.1",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "semantic-release": "^17.2.2",
+    "shelljs": "^0.8.4",
+    "travis-deploy-once": "^5.0.11"
+  }
+}
